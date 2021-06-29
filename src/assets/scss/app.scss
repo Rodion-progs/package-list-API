@@ -1,4 +1,6 @@
 // Подключение стилей бутсрапа
 @import '~bootstrap';
-
+// Пользовательские стили
+@import "./utils/index";
+@import "./components/index";
 

@@ -1,0 +1,15 @@
+.footer {
+  background-color: $accent-color;
+}
+.footer-copyright {
+  color: rgba($light-color, 0.6);
+  background-color: rgba($dark-color, 0.2)
+}
+.footer-text {
+  color: rgba($light-color, 0.6);
+}
+@media screen and (max-width: 991px) {
+  .footer-text {
+    font-size: 20px;
+  }
+}
