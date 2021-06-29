@@ -7,6 +7,7 @@
     @cancel="close"
     @close="close"
     no-close-on-backdrop
+    no-close-on-esc
     centered
     :title="title"
   >
