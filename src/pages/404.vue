@@ -1,5 +1,7 @@
 <template>
-  <div class="d-flex align-items-center justify-content-center text-center my-5">
+  <div
+    class="d-flex align-items-center justify-content-center text-center my-5"
+  >
     <section>
       <b-container>
         <h1 class="title">PAGE NOT FOUND!</h1>

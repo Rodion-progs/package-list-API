@@ -15,7 +15,7 @@
 </template>
 <script>
 import { BNavbar, BForm, BFormInput, BButton, BContainer } from "bootstrap-vue";
-import { mapActions } from "vuex";
+import { mapActions, mapMutations } from "vuex";
 
 export default {
   name: "AppHeader",
@@ -35,9 +35,17 @@ export default {
     ...mapActions({
       advancePackage: "packageList/fetchAdvancePackage",
     }),
+    ...mapMutations({
+      setShowModal: "packageList/setShowModal",
+      setError: "packageList/setError",
+    }),
     submit() {
-      this.advancePackage({ type: "npm", name: this.searchText });
-      this.searchText = "";
+      this.advancePackage({ type: "npm", name: this.searchText })
+        .then(() => {
+          this.searchText = "";
+        })
+        .catch((e) => this.setError(e))
+        .finally(() => this.setShowModal(true));
     },
   },
 };

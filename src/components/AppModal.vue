@@ -32,9 +32,13 @@ export default {
     BModal,
   },
   methods: {
-    ...mapMutations({ setShowModal: "packageList/setShowModal" }),
+    ...mapMutations({
+      setShowModal: "packageList/setShowModal",
+      setError: "packageList/setError",
+    }),
     close() {
       this.setShowModal(false);
+      this.setError("");
     },
   },
 };

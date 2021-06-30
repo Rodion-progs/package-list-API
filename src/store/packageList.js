@@ -5,7 +5,8 @@ const packageList = {
     packageList: [],
     advancePackage: {},
     perPage: 10,
-    showModal: false
+    showModal: false,
+    error: "",
   },
   mutations: {
     setPackageList(state, payload) {
@@ -17,18 +18,25 @@ const packageList = {
     setShowModal(state, payload) {
       state.showModal = payload;
     },
+    setError(state, payload) {
+      state.error = payload;
+    },
   },
   actions: {
     fetchAdvancePackage({ commit }, { type, name }) {
       const url = `https://data.jsdelivr.com/v1/package/${type}/${name}`;
-      axios
-        .get(url)
-        .then(({ data }) => {
-            commit("setAdvancePackage", {type, name, ...data});
-            commit("setShowModal", true);
-          }
-        )
-        .catch((e) => console.warn(e));
+      return new Promise((resolve, reject) => {
+        axios
+          .get(url)
+          .then(({ data }) => {
+            resolve(data);
+            commit("setAdvancePackage", { type, name, ...data });
+          })
+          .catch((e) => {
+            reject(`Ну удалось найти пакет ${name} из ${type}`);
+            console.warn(e);
+          });
+      });
     },
     fetchPackageList({ commit, getters }, page) {
       const url = `https://data.jsdelivr.com/v1/stats/packages?limit=${getters.getPerPage}&page=${page}`;
@@ -42,7 +50,8 @@ const packageList = {
     getPackageList: (state) => state.packageList,
     getPerPage: (state) => state.perPage,
     getAdvancePackage: (state) => state.advancePackage,
-    getShowModal: state => state.showModal
+    getShowModal: (state) => state.showModal,
+    getError: (state) => state.error,
   },
 };
 export default packageList;

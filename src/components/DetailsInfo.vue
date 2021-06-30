@@ -1,6 +1,9 @@
 <template>
   <div class="details">
-    <div class="details__item" v-if="Object.entries(getAdvancePackage.tags).length">
+    <div
+      class="details__item"
+      v-if="Object.entries(getAdvancePackage.tags).length"
+    >
       <h5 class="details__title">Tags</h5>
       <b-list-group flush>
         <b-list-group-item

@@ -1,8 +1,8 @@
 export default {
   data() {
     return {
-      page: 1
-    }
+      page: 1,
+    };
   },
   created() {
     this.setPage();
@@ -12,6 +12,6 @@ export default {
       if (this.$route.query.page) {
         this.page = this.$route.query.page;
       }
-    }
-  }
-}
+    },
+  },
+};

@@ -21,7 +21,7 @@
 <script>
 import { BTable, BSpinner } from "bootstrap-vue";
 import currentPage from "@/mixins/currentPage";
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 export default {
   name: "AppTable",
   components: {
@@ -41,10 +41,16 @@ export default {
       fetchPackageList: "packageList/fetchPackageList",
       advancePackage: "packageList/fetchAdvancePackage",
     }),
+    ...mapMutations({
+      setShowModal: "packageList/setShowModal",
+      setError: "packageList/setError",
+    }),
     onRowSelected(e) {
       if (!e) return;
       const { type, name } = e;
-      this.advancePackage({ type, name });
+      this.advancePackage({ type, name })
+        .catch((e) => this.setError(e))
+        .finally(() => this.setShowModal(true));
     },
   },
 };
